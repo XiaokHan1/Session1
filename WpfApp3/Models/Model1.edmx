@@ -1,0 +1,664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище user24Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Divisions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DivisionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Docs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileDoc" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="InfoClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="18" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="IdOrganization" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+          <Property Name="DataBirthday" Type="date" />
+          <Property Name="SeriyaPasport" Type="int" />
+          <Property Name="numberPasport" Type="int" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="InfoPropusk">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateS" Type="date" Nullable="false" />
+          <Property Name="DatePo" Type="date" Nullable="false" />
+          <Property Name="IdGoalVisiting" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Obshii">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdInfoPropusk" Type="int" Nullable="false" />
+          <Property Name="IdReceivingParty" Type="int" Nullable="false" />
+          <Property Name="IdAuth" Type="int" Nullable="false" />
+          <Property Name="IdDocs" Type="int" />
+          <Property Name="IdSotrudnik" Type="int" Nullable="false" />
+          <Property Name="IdInfoClient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReceivingParty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDivision" Type="int" Nullable="false" />
+          <Property Name="Fcs" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Sotrudnik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FCs" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Division" Type="nvarchar" MaxLength="50" />
+          <Property Name="Otdel" Type="nvarchar(max)" />
+          <Property Name="CodSotrudnika" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Visiting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Visiting" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_InfoClient_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="InfoClient" Type="Self.InfoClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoClient">
+              <PropertyRef Name="IdOrganization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoPropusk_Visiting">
+          <End Role="Visiting" Type="Self.Visiting" Multiplicity="1" />
+          <End Role="InfoPropusk" Type="Self.InfoPropusk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visiting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoPropusk">
+              <PropertyRef Name="IdGoalVisiting" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_Auth">
+          <End Role="Auth" Type="Self.Auth" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auth">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdAuth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_Docs">
+          <End Role="Docs" Type="Self.Docs" Multiplicity="0..1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Docs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdDocs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_InfoClient">
+          <End Role="InfoClient" Type="Self.InfoClient" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoClient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdInfoClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_InfoPropusk">
+          <End Role="InfoPropusk" Type="Self.InfoPropusk" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoPropusk">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdInfoPropusk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_ReceivingParty">
+          <End Role="ReceivingParty" Type="Self.ReceivingParty" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceivingParty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdReceivingParty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_Sotrudnik">
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdSotrudnik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceivingParty_Divisions">
+          <End Role="Divisions" Type="Self.Divisions" Multiplicity="1" />
+          <End Role="ReceivingParty" Type="Self.ReceivingParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceivingParty">
+              <PropertyRef Name="IdDivision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище user24ModelContainer">
+          <EntitySet Name="Auth" EntityType="Self.Auth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Divisions" EntityType="Self.Divisions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Docs" EntityType="Self.Docs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoClient" EntityType="Self.InfoClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfoPropusk" EntityType="Self.InfoPropusk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Obshii" EntityType="Self.Obshii" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceivingParty" EntityType="Self.ReceivingParty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sotrudnik" EntityType="Self.Sotrudnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visiting" EntityType="Self.Visiting" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_InfoClient_Organization" Association="Self.FK_InfoClient_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="InfoClient" EntitySet="InfoClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoPropusk_Visiting" Association="Self.FK_InfoPropusk_Visiting">
+            <End Role="Visiting" EntitySet="Visiting" />
+            <End Role="InfoPropusk" EntitySet="InfoPropusk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_Auth" Association="Self.FK_Obshii_Auth">
+            <End Role="Auth" EntitySet="Auth" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_Docs" Association="Self.FK_Obshii_Docs">
+            <End Role="Docs" EntitySet="Docs" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_InfoClient" Association="Self.FK_Obshii_InfoClient">
+            <End Role="InfoClient" EntitySet="InfoClient" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_InfoPropusk" Association="Self.FK_Obshii_InfoPropusk">
+            <End Role="InfoPropusk" EntitySet="InfoPropusk" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_ReceivingParty" Association="Self.FK_Obshii_ReceivingParty">
+            <End Role="ReceivingParty" EntitySet="ReceivingParty" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_Sotrudnik" Association="Self.FK_Obshii_Sotrudnik">
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceivingParty_Divisions" Association="Self.FK_ReceivingParty_Divisions">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="ReceivingParty" EntitySet="ReceivingParty" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="user24Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Auth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Obshii" Relationship="Self.FK_Obshii_Auth" FromRole="Auth" ToRole="Obshii" />
+        </EntityType>
+        <EntityType Name="Divisions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DivisionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ReceivingParty" Relationship="Self.FK_ReceivingParty_Divisions" FromRole="Divisions" ToRole="ReceivingParty" />
+        </EntityType>
+        <EntityType Name="Docs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileDoc" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Obshii" Relationship="Self.FK_Obshii_Docs" FromRole="Docs" ToRole="Obshii" />
+        </EntityType>
+        <EntityType Name="InfoClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IdOrganization" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataBirthday" Type="DateTime" Precision="0" />
+          <Property Name="SeriyaPasport" Type="Int32" />
+          <Property Name="numberPasport" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK_InfoClient_Organization" FromRole="InfoClient" ToRole="Organization" />
+          <NavigationProperty Name="Obshii" Relationship="Self.FK_Obshii_InfoClient" FromRole="InfoClient" ToRole="Obshii" />
+        </EntityType>
+        <EntityType Name="InfoPropusk">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateS" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DatePo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdGoalVisiting" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Visiting" Relationship="Self.FK_InfoPropusk_Visiting" FromRole="InfoPropusk" ToRole="Visiting" />
+          <NavigationProperty Name="Obshii" Relationship="Self.FK_Obshii_InfoPropusk" FromRole="InfoPropusk" ToRole="Obshii" />
+        </EntityType>
+        <EntityType Name="Obshii">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdInfoPropusk" Type="Int32" Nullable="false" />
+          <Property Name="IdReceivingParty" Type="Int32" Nullable="false" />
+          <Property Name="IdAuth" Type="Int32" Nullable="false" />
+          <Property Name="IdDocs" Type="Int32" />
+          <Property Name="IdSotrudnik" Type="Int32" Nullable="false" />
+          <Property Name="IdInfoClient" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Auth" Relationship="Self.FK_Obshii_Auth" FromRole="Obshii" ToRole="Auth" />
+          <NavigationProperty Name="Docs" Relationship="Self.FK_Obshii_Docs" FromRole="Obshii" ToRole="Docs" />
+          <NavigationProperty Name="InfoClient" Relationship="Self.FK_Obshii_InfoClient" FromRole="Obshii" ToRole="InfoClient" />
+          <NavigationProperty Name="InfoPropusk" Relationship="Self.FK_Obshii_InfoPropusk" FromRole="Obshii" ToRole="InfoPropusk" />
+          <NavigationProperty Name="ReceivingParty" Relationship="Self.FK_Obshii_ReceivingParty" FromRole="Obshii" ToRole="ReceivingParty" />
+          <NavigationProperty Name="Sotrudnik" Relationship="Self.FK_Obshii_Sotrudnik" FromRole="Obshii" ToRole="Sotrudnik" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="InfoClient" Relationship="Self.FK_InfoClient_Organization" FromRole="Organization" ToRole="InfoClient" />
+        </EntityType>
+        <EntityType Name="ReceivingParty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDivision" Type="Int32" Nullable="false" />
+          <Property Name="Fcs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Divisions" Relationship="Self.FK_ReceivingParty_Divisions" FromRole="ReceivingParty" ToRole="Divisions" />
+          <NavigationProperty Name="Obshii" Relationship="Self.FK_Obshii_ReceivingParty" FromRole="ReceivingParty" ToRole="Obshii" />
+        </EntityType>
+        <EntityType Name="Sotrudnik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FCs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Division" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Otdel" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodSotrudnika" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Obshii" Relationship="Self.FK_Obshii_Sotrudnik" FromRole="Sotrudnik" ToRole="Obshii" />
+        </EntityType>
+        <EntityType Name="Visiting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Visiting1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="InfoPropusk" Relationship="Self.FK_InfoPropusk_Visiting" FromRole="Visiting" ToRole="InfoPropusk" />
+        </EntityType>
+        <Association Name="FK_Obshii_Auth">
+          <End Role="Auth" Type="Self.Auth" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auth">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdAuth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReceivingParty_Divisions">
+          <End Role="Divisions" Type="Self.Divisions" Multiplicity="1" />
+          <End Role="ReceivingParty" Type="Self.ReceivingParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReceivingParty">
+              <PropertyRef Name="IdDivision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_Docs">
+          <End Role="Docs" Type="Self.Docs" Multiplicity="0..1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Docs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdDocs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoClient_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="InfoClient" Type="Self.InfoClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoClient">
+              <PropertyRef Name="IdOrganization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_InfoClient">
+          <End Role="InfoClient" Type="Self.InfoClient" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoClient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdInfoClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InfoPropusk_Visiting">
+          <End Role="Visiting" Type="Self.Visiting" Multiplicity="1" />
+          <End Role="InfoPropusk" Type="Self.InfoPropusk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visiting">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoPropusk">
+              <PropertyRef Name="IdGoalVisiting" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_InfoPropusk">
+          <End Role="InfoPropusk" Type="Self.InfoPropusk" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfoPropusk">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdInfoPropusk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_ReceivingParty">
+          <End Role="ReceivingParty" Type="Self.ReceivingParty" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReceivingParty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdReceivingParty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obshii_Sotrudnik">
+          <End Role="Sotrudnik" Type="Self.Sotrudnik" Multiplicity="1" />
+          <End Role="Obshii" Type="Self.Obshii" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrudnik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Obshii">
+              <PropertyRef Name="IdSotrudnik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="user24Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Auth" EntityType="Self.Auth" />
+          <EntitySet Name="Divisions" EntityType="Self.Divisions" />
+          <EntitySet Name="Docs" EntityType="Self.Docs" />
+          <EntitySet Name="InfoClient" EntityType="Self.InfoClient" />
+          <EntitySet Name="InfoPropusk" EntityType="Self.InfoPropusk" />
+          <EntitySet Name="Obshii" EntityType="Self.Obshii" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" />
+          <EntitySet Name="ReceivingParty" EntityType="Self.ReceivingParty" />
+          <EntitySet Name="Sotrudnik" EntityType="Self.Sotrudnik" />
+          <EntitySet Name="Visiting" EntityType="Self.Visiting" />
+          <AssociationSet Name="FK_Obshii_Auth" Association="Self.FK_Obshii_Auth">
+            <End Role="Auth" EntitySet="Auth" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReceivingParty_Divisions" Association="Self.FK_ReceivingParty_Divisions">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="ReceivingParty" EntitySet="ReceivingParty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_Docs" Association="Self.FK_Obshii_Docs">
+            <End Role="Docs" EntitySet="Docs" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoClient_Organization" Association="Self.FK_InfoClient_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="InfoClient" EntitySet="InfoClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_InfoClient" Association="Self.FK_Obshii_InfoClient">
+            <End Role="InfoClient" EntitySet="InfoClient" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InfoPropusk_Visiting" Association="Self.FK_InfoPropusk_Visiting">
+            <End Role="Visiting" EntitySet="Visiting" />
+            <End Role="InfoPropusk" EntitySet="InfoPropusk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_InfoPropusk" Association="Self.FK_Obshii_InfoPropusk">
+            <End Role="InfoPropusk" EntitySet="InfoPropusk" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_ReceivingParty" Association="Self.FK_Obshii_ReceivingParty">
+            <End Role="ReceivingParty" EntitySet="ReceivingParty" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obshii_Sotrudnik" Association="Self.FK_Obshii_Sotrudnik">
+            <End Role="Sotrudnik" EntitySet="Sotrudnik" />
+            <End Role="Obshii" EntitySet="Obshii" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище user24ModelContainer" CdmEntityContainer="user24Entities">
+          <EntitySetMapping Name="Auth">
+            <EntityTypeMapping TypeName="user24Model.Auth">
+              <MappingFragment StoreEntitySet="Auth">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Divisions">
+            <EntityTypeMapping TypeName="user24Model.Divisions">
+              <MappingFragment StoreEntitySet="Divisions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Docs">
+            <EntityTypeMapping TypeName="user24Model.Docs">
+              <MappingFragment StoreEntitySet="Docs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FileDoc" ColumnName="FileDoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoClient">
+            <EntityTypeMapping TypeName="user24Model.InfoClient">
+              <MappingFragment StoreEntitySet="InfoClient">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdOrganization" ColumnName="IdOrganization" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DataBirthday" ColumnName="DataBirthday" />
+                <ScalarProperty Name="SeriyaPasport" ColumnName="SeriyaPasport" />
+                <ScalarProperty Name="numberPasport" ColumnName="numberPasport" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfoPropusk">
+            <EntityTypeMapping TypeName="user24Model.InfoPropusk">
+              <MappingFragment StoreEntitySet="InfoPropusk">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateS" ColumnName="DateS" />
+                <ScalarProperty Name="DatePo" ColumnName="DatePo" />
+                <ScalarProperty Name="IdGoalVisiting" ColumnName="IdGoalVisiting" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Obshii">
+            <EntityTypeMapping TypeName="user24Model.Obshii">
+              <MappingFragment StoreEntitySet="Obshii">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdInfoPropusk" ColumnName="IdInfoPropusk" />
+                <ScalarProperty Name="IdReceivingParty" ColumnName="IdReceivingParty" />
+                <ScalarProperty Name="IdAuth" ColumnName="IdAuth" />
+                <ScalarProperty Name="IdDocs" ColumnName="IdDocs" />
+                <ScalarProperty Name="IdSotrudnik" ColumnName="IdSotrudnik" />
+                <ScalarProperty Name="IdInfoClient" ColumnName="IdInfoClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organization">
+            <EntityTypeMapping TypeName="user24Model.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceivingParty">
+            <EntityTypeMapping TypeName="user24Model.ReceivingParty">
+              <MappingFragment StoreEntitySet="ReceivingParty">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdDivision" ColumnName="IdDivision" />
+                <ScalarProperty Name="Fcs" ColumnName="Fcs" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrudnik">
+            <EntityTypeMapping TypeName="user24Model.Sotrudnik">
+              <MappingFragment StoreEntitySet="Sotrudnik">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FCs" ColumnName="FCs" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Otdel" ColumnName="Otdel" />
+                <ScalarProperty Name="CodSotrudnika" ColumnName="CodSotrudnika" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visiting">
+            <EntityTypeMapping TypeName="user24Model.Visiting">
+              <MappingFragment StoreEntitySet="Visiting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Visiting1" ColumnName="Visiting" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

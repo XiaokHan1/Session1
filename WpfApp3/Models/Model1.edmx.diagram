@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5cf33ab26685405e8e771a115758389c" Name="Diagram1">
+        <EntityTypeShape EntityType="user24Model.Auth" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="user24Model.Divisions" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="user24Model.Docs" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="user24Model.InfoClient" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="user24Model.InfoPropusk" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="user24Model.Obshii" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="user24Model.Organization" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="user24Model.ReceivingParty" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="user24Model.Sotrudnik" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="user24Model.Visiting" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="user24Model.FK_Obshii_Auth" ManuallyRouted="false" />
+        <AssociationConnector Association="user24Model.FK_ReceivingParty_Divisions" ManuallyRouted="false" />
+        <AssociationConnector Association="user24Model.FK_Obshii_Docs" ManuallyRouted="false" />
+        <AssociationConnector Association="user24Model.FK_InfoClient_Organization" ManuallyRouted="false" />
+        <AssociationConnector Association="user24Model.FK_Obshii_InfoClient" ManuallyRouted="false" />
+        <AssociationConnector Association="user24Model.FK_InfoPropusk_Visiting" ManuallyRouted="false" />
+        <AssociationConnector Association="user24Model.FK_Obshii_InfoPropusk" ManuallyRouted="false" />
+        <AssociationConnector Association="user24Model.FK_Obshii_ReceivingParty" ManuallyRouted="false" />
+        <AssociationConnector Association="user24Model.FK_Obshii_Sotrudnik" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
