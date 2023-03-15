@@ -215,6 +215,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Icons\png-transparent-microsoft-excel-computer-icons-microsoft-template-angle-text.png" />
     <Resource Include="Resources\Icons\e7e7f1d56a993e79178db6cda43e476f.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

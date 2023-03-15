@@ -135,8 +135,8 @@
 
                     <Border CornerRadius="8" Background="Orange" Grid.ColumnSpan="5" VerticalAlignment="Top" Height="30">
                         <StackPanel Height="20">
-                            <TextBlock Text="Принимающая сторона" FontSize="14" Width="305" 
-                                   Height="33" TextAlignment="Center"/>
+                            <TextBlock Text="Информация о посетителе" FontSize="14" Width="305" 
+                                   TextAlignment="Center"/>
                         </StackPanel>
                     </Border>
 
@@ -236,7 +236,7 @@
                             </TextBox>
                         </StackPanel>
 
-                        <Button x:Name="dobBtn" FontSize="8" Margin="20 0 0 0" BorderBrush="Orange"
+                        <Button x:Name="dobBtn" FontSize="8" Margin="20 0 5 0" BorderBrush="Orange"
                                 Content="Добавить посетителя" Foreground="Gray" Click="dobBtn_Click">
                             <Button.Resources>
                                 <Style TargetType="Border">
@@ -262,8 +262,109 @@
                                     TextAlignment="Center"/>
                         </StackPanel>
                     </Border>
-                    
-                    
+
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" Margin="8" HorizontalAlignment="Center">
+                            <Button BorderBrush="Transparent">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Resources/Icons/png-transparent-microsoft-excel-computer-icons-microsoft-template-angle-text.png" />
+                                    <TextBlock Foreground="#FFC71111" Text="загрузить список"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Margin="15 0 0 0" BorderBrush="Transparent">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Resources/Icons/png-transparent-microsoft-excel-computer-icons-microsoft-template-angle-text.png" />
+                                    <TextBlock Foreground="#FFC71111" Text="Скачать шаблон списка"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Margin="10 0 10 20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="3.6*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="2.1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock FontSize="9" Opacity="0.5" Text="№"/>
+                        <TextBlock FontSize="9" Opacity="0.5" Margin="10 0 0 0" Grid.Column="1" Text="ФИО"/>
+                        <TextBlock FontSize="9" Opacity="0.5" Grid.Column="2" Text="Контакты"/>
+                        <TextBlock FontSize="9" Opacity="0.5" Grid.Column="3" Text="Фотография"/>
+
+                        <TextBlock FontSize="9" Opacity="0.7" Text="1" Grid.Row="1"/>
+                        <TextBlock FontSize="9" Opacity="0.7" Grid.Row="2" Text="2"/>
+                        <TextBlock FontSize="9" Opacity="0.7" Grid.Row="3" Text="3"/>
+                        <TextBlock FontSize="9" Opacity="0.7" Grid.Row="4" Text="4"/>
+                        <TextBlock FontSize="9" Opacity="0.7" Grid.Row="5" Text="5"/>
+
+                        <TextBlock FontSize="9" x:Name="q" Opacity="0.7" Grid.Row="1" Grid.Column="1" Text="{Binding Name}"/>
+                        <TextBlock FontSize="9" x:Name="w" Opacity="0.7" Grid.Row="2" Grid.Column="1" Text="{Binding Name}"/>
+                        <TextBlock FontSize="9" x:Name="e" Opacity="0.7" Grid.Row="3" Grid.Column="1" Text="{Binding Name}"/>
+                        <TextBlock FontSize="9" x:Name="r" Opacity="0.7" Grid.Row="4" Grid.Column="1" Text="{Binding Name}"/>
+                        <TextBlock FontSize="9" x:Name="t" Opacity="0.7" Grid.Row="5" Grid.Column="1" Text="{Binding Name}"/>
+
+                        <TextBlock FontSize="9" x:Name="y" Opacity="0.7" Grid.Row="1" Grid.Column="2" Text="{Binding Phone}"/>
+                        <TextBlock FontSize="9" x:Name="u" Opacity="0.7" Grid.Row="2" Grid.Column="2" Text="{Binding Phone}"/>
+                        <TextBlock FontSize="9" x:Name="i" Opacity="0.7" Grid.Row="3" Grid.Column="2" Text="{Binding Phone}"/>
+                        <TextBlock FontSize="9" x:Name="o" Opacity="0.7" Grid.Row="4" Grid.Column="2" Text="{Binding Phone}"/>
+                        <TextBlock FontSize="9" x:Name="p" Opacity="0.7" Grid.Row="5" Grid.Column="2" Text="{Binding Phone}"/>
+
+                        <Button Grid.Column="3" Margin="5 2 5 2" VerticalContentAlignment="Center" Grid.Row="1" FontSize="6" BorderBrush="Orange"
+                                Content="Загрузить" Foreground="Gray" Click="Button_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Grid.Column="3" Margin="5 2 5 2" VerticalContentAlignment="Center" Grid.Row="2" FontSize="6" BorderBrush="Orange"
+                                Content="Загрузить" Foreground="Gray">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Grid.Column="3" Margin="5 2 5 2" VerticalContentAlignment="Center" Grid.Row="3" FontSize="6" BorderBrush="Orange"
+                                Content="Загрузить" Foreground="Gray">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Grid.Column="3" Margin="5 2 5 2" VerticalContentAlignment="Center" Grid.Row="4" FontSize="6" BorderBrush="Orange"
+                                Content="Загрузить" Foreground="Gray">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Grid.Column="3" Margin="5 2 5 2" VerticalContentAlignment="Center" Grid.Row="5" FontSize="6" BorderBrush="Orange"
+                                Content="Загрузить" Foreground="Gray">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </Grid>
                 </Grid>
             </Border>
         </Grid>
@@ -290,15 +391,15 @@
                 </Grid>
             </Border>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0 0 7 0">
-                <Button Margin="26 7 20 0" Opacity="0.4" Content="Очистить форму" Height="20" Width="120" Background="White" BorderBrush="White" Click="Button_Click_2">
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0 0 17 0">
+                <Button Margin="6 7 20 0" Opacity="0.4" Content="Очистить форму" Height="20" Width="120" Background="White" BorderBrush="White" Click="Button_Click_2">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="6" />
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Margin="0 7 7 0" Height="20" Width="120" Content="Оформить заявку" Background="White" BorderBrush="Orange" Click="Button_Click_3">
+                <Button Margin="0 7 7 0" Height="20" Width="90" Content="Назад" Background="White" BorderBrush="Orange" Click="Button_Click_3">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="6" />

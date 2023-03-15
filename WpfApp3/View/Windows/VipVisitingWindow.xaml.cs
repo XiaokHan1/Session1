@@ -45,19 +45,13 @@ namespace WpfApp3.View.Windows
             openFile.ShowDialog();
 
             var qwe = openFile.FileName;
-            file = File.ReadAllBytes(qwe);
+            fot = File.ReadAllBytes(qwe);
         }
-
-        public byte[] file;
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.ShowDialog();
-
-
-            var qwe = openFile.FileName;
-            file = File.ReadAllBytes(qwe);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -65,6 +59,9 @@ namespace WpfApp3.View.Windows
             TextTb1.Clear();
             FamTb.Clear();
             NameTb.Clear();
+            Cmb1.SelectedItem = null;
+            Cmb2.SelectedItem = null;
+            OrgTb.SelectedItem = null;
             OtchTb.Clear();
             PhoneTb.Clear();
             EmailTb.Clear();
@@ -129,6 +126,7 @@ namespace WpfApp3.View.Windows
 
             Models.InfoClient infoClient = new Models.InfoClient
             {
+
                 Surname = FamTb.Text,
                 Name = NameTb.Text,
                 MiddleName = OtchTb.Text,
@@ -139,18 +137,26 @@ namespace WpfApp3.View.Windows
                 DataBirthday = (DateTime)DatePc.SelectedDate,
                 SeriyaPasport = int.Parse(SeriyaTb.Text),
                 numberPasport = int.Parse(NumberTb.Text),
-                Photo = file
+                Photo = fot
+
             };
             Helpers.ClassConnect.user.InfoClient.Add(infoClient);
             Helpers.ClassConnect.user.SaveChanges();
 
             Models.Docs docs = new Models.Docs
             {
-                FileDoc = file
+                FileDoc = fot
+
             };
             Helpers.ClassConnect.user.Docs.Add(docs);
             Helpers.ClassConnect.user.SaveChanges();
             MessageBox.Show("Данные добавлены");
+        }
+        public byte[] fot;
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            AuthWindow authWindow = new AuthWindow(); authWindow.Show(); Close();
         }
     }
 }

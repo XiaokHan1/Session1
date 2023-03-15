@@ -195,7 +195,7 @@
 
                 <StackPanel Grid.Row="1" Grid.Column="3" Margin="0 3 0 0">
                     <ComboBox Margin="0 3 0 6" Name="OrgTb">
-                        
+
                     </ComboBox>
 
                     <TextBox Margin="0 3 0 6" Name="CommentTb">
@@ -214,7 +214,7 @@
                         </DatePicker.Resources>
                     </DatePicker>
 
-                    <TextBox Margin="0 5 0 5" Name="SeriyaTb">
+                    <TextBox Margin="0 5 0 5" Name="SeriyaTb" MaxLength="4">
                         <TextBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="6" />
@@ -222,7 +222,7 @@
                         </TextBox.Resources>
                     </TextBox>
 
-                    <TextBox Margin="0 5 0 5" Name="NumberTb">
+                    <TextBox Margin="0 5 0 5" Name="NumberTb" MaxLength="6">
                         <TextBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="6" />
@@ -267,20 +267,29 @@
             </Border>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0 0 7 0">
-                <Button Margin="26 7 20 0" Opacity="0.4" Content="Очистить форму" Height="20" Width="120" Background="White" BorderBrush="White" Click="Button_Click_2">
+                <Button Margin="6 7 20 0" Opacity="0.4" Content="Очистить форму" Height="20" Width="120" Background="White" BorderBrush="White" Click="Button_Click_2">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="6" />
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Margin="0 7 7 0" Height="20" Width="120" Content="Оформить заявку" Background="White" BorderBrush="Orange" Click="Button_Click_3">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="6" />
-                        </Style>
-                    </Button.Resources>
-                </Button>
+                <StackPanel>
+                    <Button Margin="0 0 7 0" Height="20" Width="120" Content="Оформить заявку" Background="White" BorderBrush="Orange" Click="Button_Click_3">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="6" />
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <Button Margin="0 7 7 5" Height="20" Width="120" Content="Назад" Background="White" BorderBrush="Orange" Click="Button_Click_4">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="6" />
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>
