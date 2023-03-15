@@ -130,7 +130,7 @@
 
                 <Border CornerRadius="8" Background="Orange" Grid.ColumnSpan="5" VerticalAlignment="Top" Height="30">
                     <StackPanel Height="20">
-                        <TextBlock Text="Принимающая сторона" FontSize="14" Width="305" 
+                        <TextBlock Text="Информация о посетителе" FontSize="14" Width="305" 
                                    Height="33" TextAlignment="Center"/>
                     </StackPanel>
                 </Border>
@@ -254,7 +254,7 @@
                 <Grid>
                     <Border CornerRadius="8" Background="Orange" Grid.ColumnSpan="5" VerticalAlignment="Top">
                         <StackPanel Height="20">
-                            <TextBlock Text="Принимающая сторона" FontSize="14" Width="305" TextAlignment="Center"/>
+                            <TextBlock Text="Прикрепляемые документы" FontSize="14" Width="305" TextAlignment="Center"/>
                         </StackPanel>
                     </Border>
 
